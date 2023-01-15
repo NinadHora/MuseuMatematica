@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from museu_matematica.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', homepage, name='homepage')
 ]

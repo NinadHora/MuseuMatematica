@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body, input, select {
+    font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    font-size: 52px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.structure {
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "content"
+        "footer"
+    ;
+}
+
+.header {
+    grid-area: header;
+}
+
+.content {
+    grid-area: content;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+@media (max-width: 1200px) {
+
+}
+
+@media (max-width: 1200px) {
+    
+}
+
+@media (max-width: 1200px) {
+    
+}
