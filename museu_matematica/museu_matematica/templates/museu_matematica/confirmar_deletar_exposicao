@@ -1,0 +1,27 @@
+{% extends 'museu_matematica/main.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Excluir Reserva</title>
+    </head>
+    <body>
+
+        <div class="header-bar">
+            <a href="{% url 'museu_matematica:reservas-exibe' %}">&#8592; Retornar</a>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <p>Confirme que você quer remover {{ reserva }}</p>
+                <input class="button" type="submit" value="Excluir">
+            </form>
+        </div>
+    </body>
+    </html>
+{% endblock content %}
