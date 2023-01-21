@@ -1,0 +1,31 @@
+{% extends 'museu_matematica/index.html' %}
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+    </head>
+    <body>
+        <div class="header-bar">
+            <h1>Register</h1>
+        </div>
+
+        <div class="card-body2">
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    <form action="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input class="button" type="submit" value="Register">
+                    </form>
+                </table>
+            </form>
+            <p>Já possui uma conta? <a href="{% url 'musem_matematica:login' %}">Login</a></p>
+        </div>
+    </body>
+    </html>
+{% endblock content %}
