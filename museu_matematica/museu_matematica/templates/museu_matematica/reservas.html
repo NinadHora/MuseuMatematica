@@ -1,0 +1,61 @@
+{% extends 'museu_matematica/index.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reservas</title>
+
+    </head>
+    <body>
+
+        <div class="header-bar">
+            <div>
+                <h1>Olá, {{request.user|title}}</h1>
+                <!--<h3 style="margin:0"></h3>-->
+            </div>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'museu_matematica:logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'museu_matematica:login' %}">Login</a>
+            {% endif %}
+        </div>
+        
+        <h1 style="text-align: center;">Lista de Reservas de Exposicoes Efetuadas</h1>
+        
+        <div id="nova-reserva">
+            <a href="{% url 'museu_matematica:reserva-criar' %}">Criar nova reserva</a>
+        </div>
+        
+
+        <div id="search-add-wrapper">
+            <form method="GET" style="display: flex;">
+                <input id="dataEntrada" type="text" name="search-area" value="{{search_input}}">
+                <input class="button" type="submit" value="Search">
+            </form>
+            <p>Procure reservas por meio de Datas de Entrada no formato AAAA-MM-DD</p> 
+        </div>
+
+        <div class="reserva-items-wrapper">
+            {% for reserva in reservas %}
+                <div class="reserva-wrapper">
+                    <span>Data de entrada: </span> {{reserva.dataEntrada}}
+                    <span>Data de saída: </span> {{reserva.dataSaida}}
+                    <span>Horário de entrada: </span> {{reserva.horarioEntrada}}
+                    <span>Horário de saída: </span> {{reserva.horarioSaida}}
+                    <a href="{% url 'museu_matematica:reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">border_color</i></a>
+                    <a class="delete-link" href="{% url 'museu_matematica:reserva-deletar' pk=reserva.id %}">&#215;</a>
+                </div>
+            {% empty %}
+            <div class="reserva-wrapper">
+                <h3>Não há nenhuma reserva efetuada</h3>
+            </div>
+                
+            {% endfor %}
+        </div>
+    </body>
+    </html>
+{% endblock content %}
