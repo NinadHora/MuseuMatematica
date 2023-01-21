@@ -21,3 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage')
 ]
+
+app_name = 'museu_matematica'
+
