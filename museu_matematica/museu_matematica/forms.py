@@ -1,6 +1,6 @@
 from django.db.models import fields
 from django import forms
-from HotelApp.models import Reserva
+from museu_matematica.models import Reserva
 
 class ReservaModel2Form(forms.ModelForm):
     class Meta:

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museu da Matemática do Rio de Janeiro</title>
-    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'museu-matematica/css/styles.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
@@ -15,14 +15,21 @@
     <div class="structure">
         <header class="header">
             <!--- logo aqui --->
-            <img src="" />
+            <img src="{% static 'museu-matematica/images/logo.png' %}">
             <div class="menu">
                 <a>Sobre</a>
                 <a>Exposições</a>
                 <a>Equipe</a>
+                <a>Contato</a>
+                <a>Login</a>
             </div>
         </header>
-        <section class="content"></section>
+        <section class="headline">
+            <h1>Nossa missão é mostrar que números também podem ser arte.</h1>
+        </section>
+        <section class="description">
+            <p>O Museu da Matemática é o primeiro museu do Rio de Janeiro dedicado inteiramente ao mundo das ciências exatas e numéricas. Contamos com inúmeras exposições para todas as faixas etárias. Explore o site para conhecer nosso trabalho, faça login para favoritar exposições, e venha nos fazer uma visita!</p>
+        </section>
         <footer class="footer"></footer>
     </div>
 </body>

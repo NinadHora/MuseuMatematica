@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+:root {
+    --color-primary: #C41E1E;
+    --color-secondary: #d3a422;
+    --color-gray: #888888;
+}
+
 body, input, select {
     font-family: 'Raleway', sans-serif;
 }
@@ -23,17 +29,61 @@ h3 {
     display: grid;
     grid-template-areas: 
         "header"
-        "content"
+        "headline"
+        "description"
         "footer"
     ;
 }
 
 .header {
+    height: 80px;
     grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5%;
+    border-bottom: 5px solid black;
 }
 
-.content {
-    grid-area: content;
+.header img {
+    max-height: 80%;
+    max-width: 30%;
+}
+
+.header a + a {
+    margin-left: 20px;
+}
+
+.headline {
+    grid-area: headline;
+    background: url('/static/museu-matematica/images/museu.jpg') no-repeat center;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 5px solid black;
+}
+
+.headline h1 {
+    color: white;
+    text-shadow: 2px 3px 5px rgba(0,0,0,0.5);
+    min-width: 80px;
+    max-width: 900px;
+    padding: 20px;
+    text-align: center;
+    line-height: 90px;
+}
+
+.description {
+    grid-area: description;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.description p {
+    text-align: center;
+    font-size: 24px;
 }
 
 .footer {
@@ -44,10 +94,10 @@ h3 {
 
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
     
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
     
 }
