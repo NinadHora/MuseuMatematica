@@ -1,0 +1,19 @@
+{% load static %}
+<!--
+Para incluir esse fragmento de página HTML
+em uma página HTML use:
+{ % include 'museu_matematica/header.html' % }
+-->
+
+<header class="header">
+    <img src="{% static 'museu-matematica/images/logo.png' %}">
+    <div class="menu">
+        <a href="/">Sobre</a>
+        <a href='{% url "exposicoes" %}'>Exposições</a>
+        <a>Equipe</a>
+        <a>Contato</a>
+        <!-- fazer um "if" aqui no botão de login pra ver se usuário está logado-->
+        <!-- se está, ele vira o botão de logout (e chama outra url)-->
+        <a href='{% url "login" %}'>Login</a>
+    </div>
+</header>

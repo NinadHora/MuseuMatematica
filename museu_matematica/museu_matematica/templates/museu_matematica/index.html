@@ -13,24 +13,22 @@
 </head>
 <body>
     <div class="structure">
-        <header class="header">
-            <!--- logo aqui --->
-            <img src="{% static 'museu-matematica/images/logo.png' %}">
-            <div class="menu">
-                <a>Sobre</a>
-                <a>Exposições</a>
-                <a>Equipe</a>
-                <a>Contato</a>
-                <a>Login</a>
-            </div>
-        </header>
+
+        <!-- header do site -->
+        {% include 'museu_matematica/header.html' %}
+
         <section class="headline">
             <h1>Nossa missão é mostrar que números também podem ser arte.</h1>
         </section>
+
         <section class="description">
             <p>O Museu da Matemática é o primeiro museu do Rio de Janeiro dedicado inteiramente ao mundo das ciências exatas e numéricas. Contamos com inúmeras exposições para todas as faixas etárias. Explore o site para conhecer nosso trabalho, faça login para favoritar exposições, e venha nos fazer uma visita!</p>
         </section>
-        <footer class="footer"></footer>
+
+        <footer class="footer">
+
+        </footer>
+        
     </div>
 </body>
 </html>

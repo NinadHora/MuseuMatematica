@@ -19,7 +19,10 @@ from museu_matematica.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage, name='homepage')
+    path('', homepage, name='homepage'),
+    path('exposicoes/', exposicoes, name='exposicoes'),
+    path('login/', login, name='login'),
+    path('reservar/', exposicoes, name='reservar'),
 ]
 
 app_name = 'museu_matematica'
