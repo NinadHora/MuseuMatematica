@@ -22,7 +22,7 @@ urlpatterns = [
     path('', homepage, name='homepage'),
     path('exposicoes/', exposicoes, name='exposicoes'),
     path('login/', login, name='login'),
-    path('reservar/', exposicoes, name='reservar'),
+    path('reservar/', reservar, name='reservar'),
 ]
 
 app_name = 'museu_matematica'

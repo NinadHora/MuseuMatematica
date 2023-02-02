@@ -8,6 +8,14 @@ a {
     padding: 0;
 }
 
+.menu a {
+    -webkit-transition: color 0.5s; /* For Safari 3.0 to 6.0 */
+    transition: color 0.5s; /* For modern browsers */
+}
+.menu a:hover {
+    color: #C41E1E;
+}
+
 :root {
     --color-primary: #C41E1E;
     --color-secondary: #d3a422;

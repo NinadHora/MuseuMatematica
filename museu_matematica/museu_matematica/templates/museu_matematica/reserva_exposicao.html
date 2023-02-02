@@ -1,5 +1,4 @@
-{% extends 'museu_matematica/index.html' %}
-{% block content %}
+{% load static %}   
     <!DOCTYPE html>
     <html lang="pt-BR">
     <head>
@@ -27,8 +26,7 @@
                     </form>
                 </table>
             </form>
-            <p>Já possui uma conta? <a href="{% url 'museu_matematica:login' %}">Login</a></p>
+            <p>Já possui uma conta? <a href="{% url 'login' %}">Login</a></p>
         </div>
     </body>
     </html>
-{% endblock content %}
