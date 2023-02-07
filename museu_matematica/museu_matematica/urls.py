@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from museu_matematica.views import *
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls.base import reverse_lazy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
     path('exposicoes/', exposicoes, name='exposicoes'),
-    path('login/', login, name='login'),
     path('reservar/', reservar, name='reservar'),
+    path('login/', LoginView.as_view(template_name="museu_matematica/login.html"), name='login'),
+    path('logout/', LogoutView.as_view(next_page = reverse_lazy('homepage')), name='logout'),
 ]
 
 app_name = 'museu_matematica'

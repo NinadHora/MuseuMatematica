@@ -12,8 +12,10 @@ em uma página HTML use:
         <a href='{% url "exposicoes" %}'>Exposições</a>
         <a>Equipe</a>
         <a>Contato</a>
-        <!-- fazer um "if" aqui no botão de login pra ver se usuário está logado-->
-        <!-- se está, ele vira o botão de logout (e chama outra url)-->
-        <a href='{% url "login" %}'>Login</a>
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
     </div>
 </header>
