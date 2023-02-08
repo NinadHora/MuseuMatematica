@@ -33,7 +33,9 @@
                             <button>Editar</button>
                             <button>Excluir</button>
                         {% else %}
-                            <button>Reservar</button>
+                        <form action="{% url 'reservar' pk=exposicao.id %}">
+                            <input type="submit" value="Reservar" />
+                        </form>
                         {% endif %}
                     {% endif %}
                 </div>
@@ -42,31 +44,5 @@
             <h3>Nenhuma exposição cadastrada, volte mais tarde!</h3>
             {% endfor %}
         </div>
-
-        <!-- tabela antiga
-        <table class="exp_table">
-            {% for exposicao in exposicoes %}
-                <tr>
-                    <td height="125px" valign="top" class="exp_image_row"><img src="{% static 'museu-matematica/images/exposicao.jpg' %}" width="125px"></tr>
-                    
-                        <td class="exp_titulo">{{ exposicao.titulo }}</td>
-                    <td>{{exposicao.descricao }}</td>
-                    {% if request.user.is_superuser %}
-                        <td> <a href="{% url 'reservar' %}">Excluir</a> </td>
-                        <td> <a href="{% url 'reservar' %}">Editar</a> </td>
-                    {% else %}
-                    {% if request.user.is_authenticated %}
-                        <td colspan="2"> <a href="{% url 'reservar' %}">Reservar!</a> </td>
-                    {% endif %}
-                    {% if not request.user.is_authenticated %}
-                        <td colspan="2">Faça Login para reservar!</td>
-                    {% endif %}
-                    {% endif %}
-                </tr>
-            {% empty %}
-                <tr><th colspan="5">Não temos nenhuma exposição disponível no momento. Volte mais tarde.</th></tr>
-            {% endfor %}
-        </table>
-        -->
     </body>
     </html>

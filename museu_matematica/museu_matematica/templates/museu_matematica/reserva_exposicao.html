@@ -15,7 +15,16 @@
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
 
-        <h1>tela de reserva</h1>
-        
+        <h3>Reservar "{{exposicao.titulo}}"</h3>
+        <form action="" method="POST">
+            <fieldset style="width: max-content;">
+                <legend>Formulário de reserva</legend>
+                {% csrf_token %}
+                <table class='formulario'>
+                    {{ formulario.as_table }}
+                </table>
+                <button type="submit">Reservar!</button>
+            </fieldset>
+        </form>
     </body>
     </html>

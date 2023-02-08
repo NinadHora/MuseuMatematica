@@ -21,4 +21,4 @@ class Reserva(models.Model):
     horarioSaida = models.TimeField(verbose_name = 'Horário de saída', help_text = 'Utilize o formato HH:MM')
 
     def __str__(self):
-        return str(self.dataEntrada) + ' - ' + str(self.dataSaida)
+        return str(self.user) + ' - ' + str(self.exposicao) + ' - ' + str(self.dataEntrada)

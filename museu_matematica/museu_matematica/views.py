@@ -24,32 +24,6 @@ class ExposicaoListView(View):
         context = { 'exposicoes': exposicoes, }
         return render(request, 'museu_matematica/exposicoes.html', context)
 
-class ReservaLoginView(LoginView):
-    template_name = 'museu_matematica/login.html'
-    fields = '__all__'
-    redirect_authenticated_user = True
-
-    def get_success_url(self):
-        return reverse_lazy("homepage")
-
-class ReservaRegisterPage(FormView):
-    template_name = 'museu_matematica/register.html'
-    form_class = UserCreationForm
-    redirect_authenticated_user = True
-    success_url = reverse_lazy("museu_matematica:reservas-exibe")
-
-    def form_valid(self, form):
-        user = form.save()
-
-        if user is not None:
-            login(self.request, user)
-        return super(ReservaRegisterPage, self).form_valid(form)
-    
-    def get(self, *args, **kwargs):
-        if self.request.user.is_authenticated:
-            return redirect("museu_matematica:reservas-exibe")
-        return super(ReservaRegisterPage, self).get(*args, **kwargs)
-
 def verificaReserva(request):
     search_input_hrEntrada = request.GET.get('hrEntrada')
     search_input_hrSaida = request.GET.get('hrSaida')
@@ -74,7 +48,7 @@ class ReservaListView(LoginRequiredMixin, ListView):
     model = Reserva
     template_name = 'museu_matematica/reserva.html'
     context_object_name = 'reservas'
-    success_url = reverse_lazy("museu_matematica:reservas-exibe")
+    success_url = reverse_lazy("museu_matematica/reservas-exibe")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -103,15 +77,32 @@ class ReservaDetail(LoginRequiredMixin, CreateView):
     def post(self, request, *args, **kwargs):
         pass
 
+class ReservaCreateView(View):
+    def get(self, request, pk, *args, **kwargs):
+        context = {
+            'exposicao': Exposicao.objects.get(pk=pk),
+            'formulario': ReservaModel2FormCreate, 
+            }
+        return render(request, "museu_matematica/reserva_exposicao.html", context) 
+    def post(self, request, pk, *args, **kwargs):
+        formulario = ReservaModel2FormCreate(request.POST)
+        if formulario.is_valid():
+            reserva = formulario.save()
+            reserva.user = self.request.user
+            reserva.exposicao = get_object_or_404(Exposicao, pk=pk)
+            reserva.save()
+            return HttpResponseRedirect(reverse_lazy("homepage"))
+
 class ReservaCreate(LoginRequiredMixin, CreateView):
     model = Reserva
     template_name = 'museu_matematica/reserva_criar.html'
     context_object_name = 'reserva'
     fields = ['dataEntrada', 'dataSaida', 'horarioEntrada', 'horarioSaida']
-    success_url = reverse_lazy("museu_matematica:reservas-exibe") # Após post submetido
+    success_url = reverse_lazy("museu_matematica/reservas-exibe") # Após post submetido
 
-    def form_valid(self, form):
+    def form_valid(self, form, exposicao):
         form.instance.user = self.request.user
+        form.instance.exposicao = Exposicao.objects.get(pk = exposicao)
         return super(ReservaCreate, self).form_valid(form)
 
         
@@ -155,16 +146,16 @@ def reservar(request):
 
 def registro(request):
     if request.method == 'POST':
-        # cria usuário
+        # create user
         formulario = UserCreationForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return redirect('homepage')
         else:
-          context = {'form': formulario, }
+            context = {'form': formulario, }
         return render(request, 'museu_matematica/registro.html', context)
     else:
-        # exibe formulário
+        # render form
         formulario = UserCreationForm()
     context = {'form': formulario, }
     return render(request, 'museu_matematica/registro.html')

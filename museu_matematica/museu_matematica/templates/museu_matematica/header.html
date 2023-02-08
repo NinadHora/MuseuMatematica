@@ -10,7 +10,7 @@ em uma página HTML use:
     <div class="menu">
         <a href="/">Sobre</a>
         <a href='{% url "exposicoes" %}'>Exposições</a>
-        <a>Equipe</a>
+        <a>Reservas</a>
         <a>Contato</a>
         {% if request.user.is_authenticated %}
             <a href="{% url 'logout' %}">Logout</a>

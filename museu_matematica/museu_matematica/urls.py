@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
     path('exposicoes/', ExposicaoListView.as_view(), name='exposicoes'),
-    path('reservar/', reservar, name='reservar'),
+    path('reservar/<int:pk>', ReservaCreateView.as_view(), name='reservar'),
     path('accounts/login/', LoginView.as_view(template_name="museu_matematica/login.html"), name='login'),
     path('accounts/logout/', LogoutView.as_view(next_page = reverse_lazy('homepage')), name='logout'),
     path('accounts/registro/', registro, name = 'registro'),
