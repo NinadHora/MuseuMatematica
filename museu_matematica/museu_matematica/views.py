@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.models import User
 
-from museu_matematica.models import Reserva
+from museu_matematica.models import Reserva, Exposicao
 from museu_matematica.forms import ReservaModel2Form
 from museu_matematica.forms import ReservaModel2FormCreate
 
@@ -18,13 +18,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
+class ExposicaoListView(View):
+    def get(self, request, *args, **kwargs):
+        exposicoes = Exposicao.objects.all()
+        context = { 'exposicoes': exposicoes, }
+        return render(request, 'museu_matematica/exposicoes.html', context)
+
 class ReservaLoginView(LoginView):
     template_name = 'museu_matematica/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        return reverse_lazy("museu_matematica:reservas-exibe")
+        return reverse_lazy("homepage")
 
 class ReservaRegisterPage(FormView):
     template_name = 'museu_matematica/register.html'
@@ -141,11 +147,24 @@ class ReservaDelete(LoginRequiredMixin, View):
 def homepage(request):
     return render(request, 'museu_matematica/index.html')
 
-def exposicoes(request):
-    return render(request, 'museu_matematica/reservas.html')
-
 def login(request):
     return render(request, 'museu_matematica/login.html')
 
 def reservar(request):
     return render(request, 'museu_matematica/reserva_exposicao.html')
+
+def registro(request):
+    if request.method == 'POST':
+        # cria usuário
+        formulario = UserCreationForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('homepage')
+        else:
+          context = {'form': formulario, }
+        return render(request, 'museu_matematica/registro.html', context)
+    else:
+        # exibe formulário
+        formulario = UserCreationForm()
+    context = {'form': formulario, }
+    return render(request, 'museu_matematica/registro.html')

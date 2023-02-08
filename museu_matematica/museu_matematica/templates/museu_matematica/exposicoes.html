@@ -1,0 +1,50 @@
+{% load static %}
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Exposições</title>
+        <link rel="stylesheet" href="{% static 'museu-matematica/css/styles.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- header do site -->
+        {% include 'museu_matematica/header.html' %}
+
+
+        <h1>Exposições</h1>
+
+        
+
+        <!-- tabela antiga
+        <table class="exp_table">
+            {% for exposicao in exposicoes %}
+                <tr>
+                    <td height="125px" valign="top" class="exp_image_row"><img src="{% static 'museu-matematica/images/exposicao.jpg' %}" width="125px"></tr>
+                    
+                        <td class="exp_titulo">{{ exposicao.titulo }}</td>
+                    <td>{{exposicao.descricao }}</td>
+                    {% if request.user.is_superuser %}
+                        <td> <a href="{% url 'reservar' %}">Excluir</a> </td>
+                        <td> <a href="{% url 'reservar' %}">Editar</a> </td>
+                    {% else %}
+                    {% if request.user.is_authenticated %}
+                        <td colspan="2"> <a href="{% url 'reservar' %}">Reservar!</a> </td>
+                    {% endif %}
+                    {% if not request.user.is_authenticated %}
+                        <td colspan="2">Faça Login para reservar!</td>
+                    {% endif %}
+                    {% endif %}
+                </tr>
+            {% empty %}
+                <tr><th colspan="5">Não temos nenhuma exposição disponível no momento. Volte mais tarde.</th></tr>
+            {% endfor %}
+        </table>
+        -->
+    </body>
+    </html>

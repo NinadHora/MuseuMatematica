@@ -16,6 +16,8 @@
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
 
+        <h2>Login</h2>
+
         <div class="card-body">
             <form action="" method="post">
                 {% csrf_token %}
@@ -27,7 +29,7 @@
                     </form>
                 </table>
             </form>
-            <p>Ainda não pussui uma conta? <a>Criar Conta</a></p>
+            <p>Ainda não pussui uma conta? <a href='{% url "registro" %}'>Criar Conta</a></p>
         </div>
     </body>
     </html>

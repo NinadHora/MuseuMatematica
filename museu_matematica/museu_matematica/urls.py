@@ -22,10 +22,11 @@ from django.urls.base import reverse_lazy
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
-    path('exposicoes/', exposicoes, name='exposicoes'),
+    path('exposicoes/', ExposicaoListView.as_view(), name='exposicoes'),
     path('reservar/', reservar, name='reservar'),
-    path('login/', LoginView.as_view(template_name="museu_matematica/login.html"), name='login'),
-    path('logout/', LogoutView.as_view(next_page = reverse_lazy('homepage')), name='logout'),
+    path('accounts/login/', LoginView.as_view(template_name="museu_matematica/login.html"), name='login'),
+    path('accounts/logout/', LogoutView.as_view(next_page = reverse_lazy('homepage')), name='logout'),
+    path('accounts/registro/', registro, name = 'registro'),
 ]
 
 app_name = 'museu_matematica'
