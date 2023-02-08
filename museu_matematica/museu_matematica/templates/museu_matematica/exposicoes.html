@@ -16,10 +16,32 @@
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
 
+        <h1 class="exposicoes_text">Exposições</h1>
 
-        <h1>Exposições</h1>
-
-        
+        <div class="exp_container">
+            {% for exposicao in exposicoes %}
+            <div class="exp_card">
+                <img src="{% static 'museu-matematica/images/exposicao.jpg' %}">
+                <p class="exp_card_title">{{exposicao.titulo}}</p>
+                <p>{{exposicao.descricao}}</p>
+                <div class="exp_buttons">
+                    <!--se usuário não está autenticado-->
+                    {% if not request.user.is_authenticated %}
+                        <h4>Faça login para reservar</h4>
+                    {% else %}
+                        {% if request.user.is_superuser %}
+                            <button>Editar</button>
+                            <button>Excluir</button>
+                        {% else %}
+                            <button>Reservar</button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <h3>Nenhuma exposição cadastrada, volte mais tarde!</h3>
+            {% endfor %}
+        </div>
 
         <!-- tabela antiga
         <table class="exp_table">
