@@ -32,6 +32,7 @@ urlpatterns = [
     path('accounts/login/', LoginView.as_view(template_name="museu_matematica/login.html"), name='login'),
     path('accounts/logout/', LogoutView.as_view(next_page = reverse_lazy('homepage')), name='logout'),
     path('accounts/registro/', registro, name = 'registro'),
+    path("reserva-ajax", views.verificaReserva, name = 'reserva-ajax'),
 ]
 
 app_name = 'museu_matematica'
