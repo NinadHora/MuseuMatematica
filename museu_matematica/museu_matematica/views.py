@@ -54,7 +54,7 @@ class ReservaListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
 
         if not self.request.user.is_superuser:
-            context['reservas'] = context['reservas'].filter(user = self.request.user) # Apenas os itens do usuário logado
+            context['reservas'] = context['reservas'].filter(user = self.request.user) # Apenas os itens do usuário logado (se for admin, vê todos)
 
         search_input = self.request.GET.get('search-area') or ''
 

@@ -142,6 +142,34 @@ h3 {
     font-size: 20px;
 }
 
+.reserva-items-wrapper {
+    padding: 20px;
+}
+
+.reserva-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid black;
+    background-color: beige;
+    min-height: 50px;
+    max-height: 100px;
+}
+
+.reserva-wrapper span {
+    font-weight: bold;
+}
+
+.reserva-buttons {
+    font-size: 40px;
+    padding-right: 20px;
+}
+
+.reserva-descricao {
+    padding-left: 20px;
+}
+
 @media (max-width: 1200px) {
 
 }

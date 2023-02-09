@@ -15,9 +15,18 @@
 
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
-        <h3 class="hellotext">Olá, {% firstof user.username %}!</h3>
-        <h2>Lista de reservas</h2>
-        
+
+        <div class ="hellotext_wrapper">
+            <h3 class="hellotext">Olá, {% firstof user.username %}!</h3>
+            <h2>Lista de reservas</h2>
+        </div>
+
+        {% if request.user.is_superuser %}
+        <div class="admin-stats">
+            Estatísticas de admin:
+            <h4>{{ reservas.count }} reservas ativas em todo o site.</h4>
+        </div>
+        {% endif %}
 
         <div id="search-add-wrapper">
             <form method="GET" style="display: flex;">
@@ -30,16 +39,20 @@
         <div class="reserva-items-wrapper">
             {% for reserva in reservas %}
                 <div class="reserva-wrapper">
-                    {% if request.user.is_superuser %}
-                    {{reserva.user}} -
-                    {% endif %}
-                    <span>Exposição: </span> {{reserva.exposicao}}
-                    <span>Data de entrada: </span> {{reserva.dataEntrada}}
-                    <span>Data de saída: </span> {{reserva.dataSaida}}
-                    <span>Horário de entrada: </span> {{reserva.horarioEntrada}}
-                    <span>Horário de saída: </span> {{reserva.horarioSaida}}
-                    <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">Editar</i></a>
-                    <a class="delete-link" href="{% url 'reserva-delete' pk=reserva.id %}">&#215;</a>
+                    <div class ="reserva-descricao">
+                        {% if request.user.is_superuser %}
+                        <span>{{reserva.user}}: </span>
+                        {% endif %}
+                        <span>Exposição: </span> {{reserva.exposicao}} |
+                        <span>Data de entrada: </span> {{reserva.dataEntrada}} |
+                        <span>Data de saída: </span> {{reserva.dataSaida}} |
+                        <span>Horário de entrada: </span> {{reserva.horarioEntrada}} |
+                        <span>Horário de saída: </span> {{reserva.horarioSaida}}
+                    </div>
+                    <div class = "reserva-buttons">
+                        <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">&#9998;</i></a>
+                        <a class="delete-link" href="{% url 'reserva-delete' pk=reserva.id %}">&#215;</a>
+                    </div>
                 </div>
             {% empty %}
             <div class="reserva-wrapper">
