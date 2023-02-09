@@ -18,7 +18,6 @@
         <h3>Reservar "{{exposicao.titulo}}"</h3>
         <form action="" method="POST">
             <fieldset style="width: max-content;">
-                <legend>Formulário de reserva</legend>
                 {% csrf_token %}
                 <table class='formulario'>
                     {{ formulario.as_table }}

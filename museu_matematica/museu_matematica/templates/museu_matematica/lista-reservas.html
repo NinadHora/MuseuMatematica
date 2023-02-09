@@ -15,7 +15,7 @@
 
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
-        <h3>Olá, {% firstof user.username %}!</h3>
+        <h3 class="hellotext">Olá, {% firstof user.username %}!</h3>
         <h2>Lista de reservas</h2>
         
 
@@ -35,8 +35,8 @@
                     <span>Data de saída: </span> {{reserva.dataSaida}}
                     <span>Horário de entrada: </span> {{reserva.horarioEntrada}}
                     <span>Horário de saída: </span> {{reserva.horarioSaida}}
-                    <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">border_color</i></a>
-                    <a class="delete-link" href="{% url 'reserva-deletar' pk=reserva.id %}">&#215;</a>
+                    <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">Editar</i></a>
+                    <a class="delete-link" href="{% url 'reserva-delete' pk=reserva.id %}">&#215;</a>
                 </div>
             {% empty %}
             <div class="reserva-wrapper">

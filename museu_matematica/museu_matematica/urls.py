@@ -26,7 +26,7 @@ urlpatterns = [
     path('reservar/<int:pk>', ReservaCreateView.as_view(), name='reservar'),
     path('lista-reservas/', ReservaListView.as_view(), name="lista-reservas"),
     path('editar-reserva/<int:pk>', ReservaUpdate.as_view(), name="reserva-editar"),
-    path('deletar-reserva/<int:pk>', ReservaDelete.as_view(), name="reserva-deletar"),
+    path('reserva-delete/<int:pk>', ReservaDelete.as_view(), name="reserva-delete"),
     path('accounts/login/', LoginView.as_view(template_name="museu_matematica/login.html"), name='login'),
     path('accounts/logout/', LogoutView.as_view(next_page = reverse_lazy('homepage')), name='logout'),
     path('accounts/registro/', registro, name = 'registro'),

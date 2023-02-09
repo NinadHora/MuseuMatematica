@@ -15,10 +15,10 @@
     <body>
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
-
+        <div class ="hellotext_wrapper">
         <h3>Olá, {% firstof user.username "visitante" %}!</h3>
         <h1 class="exposicoes_text">Exposições</h1>
-
+        </div>
         <div class="exp_container">
             {% for exposicao in exposicoes %}
             <div class="exp_card">

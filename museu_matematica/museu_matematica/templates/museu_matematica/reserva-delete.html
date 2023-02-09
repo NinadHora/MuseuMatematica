@@ -5,25 +5,23 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Register</title>
+        <title>Excluir reserva</title>
         <link rel="stylesheet" href="{% static 'museu-matematica/css/styles.css' %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
         </head>
     <body>
+
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
 
-        <h3>Editar reserva de "{{reserva.exposicao}}"</h3>
-        <form method="POST", action="">
-            <fieldset style="width: max-content;">
+        <div class="card-body">
+            <form method="post">
                 {% csrf_token %}
-                <table class='formulario'>
-                    {{ form.as_table }}
-                </table>
-                <button type="submit">Reservar!</button>
-            </fieldset>
-        </form>
+                <p>Quer realmente remover sua reserva de {{ reserva.exposicao }}?</p>
+                <input class="button" type="submit" value="Excluir">
+            </form>
+        </div>
     </body>
     </html>

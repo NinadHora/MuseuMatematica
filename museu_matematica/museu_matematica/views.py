@@ -52,7 +52,7 @@ class ReservaListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         context['reservas'] = context['reservas'].filter(user = self.request.user) # Apenas os itens do usuário logado
 
         search_input = self.request.GET.get('search-area') or ''
@@ -111,7 +111,7 @@ class ReservaUpdate(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs): # Busca os dados de uma reserva e exibe como um formulário
         reserva = Reserva.objects.get(pk=pk)
         formulario = ReservaModel2FormCreate(instance=reserva)
-        context = {'form': formulario, } # Coloca o registro recuperado do banco e coloca num formulário
+        context = {'form': formulario, 'reserva': reserva} # Coloca o registro recuperado do banco e coloca num formulário
         return render(request, 'museu_matematica/reserva-editar.html', context)
 
     def post(self, request, pk, *args, **kwargs): # Recebe os dados de uma reserva e atualiza o banco de dados
@@ -130,11 +130,11 @@ class ReservaDelete(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
         reserva = Reserva.objects.get(pk=pk)
         context = { 'reserva': reserva }
-        return render(request, 'museu_matematica/reserva_confirmar_deletar.html', context)
+        return render(request, 'museu_matematica/reserva-delete.html', context)
 
     def post(self, request, pk, *args, **kwargs):
         reserva = Reserva.objects.filter(pk=pk).delete()
-        return HttpResponseRedirect(reverse_lazy("museu_matematica:reservas-exibe"))
+        return HttpResponseRedirect(reverse_lazy("lista-reservas"))
 
 # Create your views here.
 def homepage(request):
