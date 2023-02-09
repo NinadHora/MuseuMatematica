@@ -41,7 +41,7 @@
 
             var xmlhttp = new XMLHttpRequest();
 
-            xmlhttp.open("GET", "{% url 'museu_matematica:reserva-ajax' %}?hrEntrada=" +
+            xmlhttp.open("GET", "{% url 'reserva-ajax' %}?hrEntrada=" +
             encodeURIComponent(campoHorarioEntrada.value) + "&hrSaida=" +
             encodeURIComponent(campoHorarioSaida.value) + "&dtEntrada=" +
             encodeURIComponent(campoDataEntrada.value) + "&dtSaida=" +
