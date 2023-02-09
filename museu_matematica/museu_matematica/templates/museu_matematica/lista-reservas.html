@@ -30,6 +30,9 @@
         <div class="reserva-items-wrapper">
             {% for reserva in reservas %}
                 <div class="reserva-wrapper">
+                    {% if request.user.is_superuser %}
+                    {{reserva.user}} -
+                    {% endif %}
                     <span>Exposição: </span> {{reserva.exposicao}}
                     <span>Data de entrada: </span> {{reserva.dataEntrada}}
                     <span>Data de saída: </span> {{reserva.dataSaida}}
