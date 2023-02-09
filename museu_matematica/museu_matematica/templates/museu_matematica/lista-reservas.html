@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Reservas</title>
+        <title>Suas Reservas</title>
         <link rel="stylesheet" href="{% static 'museu-matematica/css/styles.css' %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,12 +15,8 @@
 
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
-        
-        <h1 style="text-align: center;">Lista de Reservas de Exposicoes Efetuadas</h1>
-        
-        <div id="nova-reserva">
-            <a href="{% url 'reservar' %}">Criar nova reserva</a>
-        </div>
+        <h3>Olá, {% firstof user.username %}!</h3>
+        <h2>Lista de reservas</h2>
         
 
         <div id="search-add-wrapper">
@@ -34,16 +30,17 @@
         <div class="reserva-items-wrapper">
             {% for reserva in reservas %}
                 <div class="reserva-wrapper">
+                    <span>Exposição: </span> {{reserva.exposicao}}
                     <span>Data de entrada: </span> {{reserva.dataEntrada}}
                     <span>Data de saída: </span> {{reserva.dataSaida}}
                     <span>Horário de entrada: </span> {{reserva.horarioEntrada}}
                     <span>Horário de saída: </span> {{reserva.horarioSaida}}
-                    <a href="{% url 'museu_matematica:reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">border_color</i></a>
-                    <a class="delete-link" href="{% url 'museu_matematica:reserva-deletar' pk=reserva.id %}">&#215;</a>
+                    <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">border_color</i></a>
+                    <a class="delete-link" href="{% url 'reserva-deletar' pk=reserva.id %}">&#215;</a>
                 </div>
             {% empty %}
             <div class="reserva-wrapper">
-                <h3>Não há nenhuma reserva efetuada</h3>
+                <h3>Não há nenhuma reserva efetuada.</h3>
             </div>
                 
             {% endfor %}

@@ -46,12 +46,13 @@ def verificaReserva(request):
 
 class ReservaListView(LoginRequiredMixin, ListView):
     model = Reserva
-    template_name = 'museu_matematica/reserva.html'
+    template_name = 'museu_matematica/lista-reservas.html'
     context_object_name = 'reservas'
-    success_url = reverse_lazy("museu_matematica/reservas-exibe")
+    success_url = reverse_lazy("lista-reservas")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        
         context['reservas'] = context['reservas'].filter(user = self.request.user) # Apenas os itens do usuário logado
 
         search_input = self.request.GET.get('search-area') or ''
@@ -111,7 +112,7 @@ class ReservaUpdate(LoginRequiredMixin, View):
         reserva = Reserva.objects.get(pk=pk)
         formulario = ReservaModel2FormCreate(instance=reserva)
         context = {'form': formulario, } # Coloca o registro recuperado do banco e coloca num formulário
-        return render(request, 'museu_matematica/reserva_editar.html', context)
+        return render(request, 'museu_matematica/reserva-editar.html', context)
 
     def post(self, request, pk, *args, **kwargs): # Recebe os dados de uma reserva e atualiza o banco de dados
         reserva = get_object_or_404(Reserva, pk=pk) # Pega a reserva ou retorna erro 404
@@ -119,10 +120,11 @@ class ReservaUpdate(LoginRequiredMixin, View):
         if formulario.is_valid():
             contato = formulario.save()
             contato.save()
-            return HttpResponseRedirect(reverse_lazy("museu_matematica:reservas-exibe"))
-        else:
-            context = {'formulario': formulario, } # Coloca o registro recuperado e coloca num formulário
-            return render(request, 'museu_matematica/reserva_criar.html', context)
+            return HttpResponseRedirect(reverse_lazy("lista-reservas"))
+        # else:
+            # context = {'formulario': formulario, } # Coloca o registro recuperado e coloca num formulário
+            # return render(request, 'museu_matematica/reserva_criar.html', context)
+            
 
 class ReservaDelete(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):

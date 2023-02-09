@@ -16,6 +16,7 @@
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
 
+        <h3>Olá, {% firstof user.username "visitante" %}!</h3>
         <h1 class="exposicoes_text">Exposições</h1>
 
         <div class="exp_container">
