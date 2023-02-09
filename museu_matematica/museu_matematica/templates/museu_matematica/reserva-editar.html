@@ -26,5 +26,66 @@
                 </fieldset>
             </form>
         </div>
+        
+         {% block javascript %}
+    <script>
+        function entradasIguais(e){
+            // Recupera o campo
+            var campoHorarioEntrada = document.getElementById('id_dataEntrada');
+            var campoHorarioSaida = document.getElementById('id_dataSaida');
+            var campoDataEntrada = document.getElementById('id_horarioEntrada');
+            var campoDataSaida = document.getElementById('id_horarioSaida');
+
+            // Cria o objeto HTTP Request e abre conexão
+
+            var xmlhttp = new XMLHttpRequest();
+
+            xmlhttp.open("GET", "{% url 'museu_matematica:reserva-ajax' %}?hrEntrada=" +
+            encodeURIComponent(campoHorarioEntrada.value) + "&hrSaida=" +
+            encodeURIComponent(campoHorarioSaida.value) + "&dtEntrada=" +
+            encodeURIComponent(campoDataEntrada.value) + "&dtSaida=" +
+            encodeURIComponent(campoDataSaida.value)  
+            ,true);
+
+            // Função de callback
+
+            xmlhttp.onreadystatechange = function(){
+                if(xmlhttp.status == 200 && xmlhttp.readyState == 4){
+                    resposta = JSON.parse(xmlhttp.responseText);
+                    console.log(resposta) 
+
+                    if(resposta.hrIgual == 'True'){
+                        document.getElementById('alertaUsuario').innerHTML = "Campos de horário iguais para o mesmo dia. Por favor, altere os campos."
+                    }
+                    else{
+                        document.getElementById('alertaUsuario').innerHTML = ""
+                    }
+                }
+            };
+
+            // Envia o Request
+            xmlhttp.send(null);
+        }
+
+        document.getElementById('id_dataEntrada').addEventListener('keyup', function(e){
+            entradasIguais(e)
+        });
+
+        document.getElementById('id_dataSaida').addEventListener('keyup', function(e){
+            entradasIguais(e)
+        });
+
+        document.getElementById('id_horarioEntrada').addEventListener('keyup', function(e){
+            entradasIguais(e)
+        });
+
+        document.getElementById('id_horarioSaida').addEventListener('keyup', function(e){
+            entradasIguais(e)
+        });
+    </script>
+    {% endblock %}
+        
+        
+        
     </body>
     </html>
