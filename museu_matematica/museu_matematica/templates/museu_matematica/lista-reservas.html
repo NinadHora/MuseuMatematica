@@ -18,7 +18,7 @@
 
         <div class ="hellotext_wrapper">
             <h3 class="hellotext">Olá, {% firstof user.username %}!</h3>
-            <h2>Lista de reservas</h2>
+            <h2 class="reservas-text">Lista de reservas</h2>
         </div>
 
         {% if request.user.is_superuser %}
@@ -50,8 +50,8 @@
                         <span>Horário de saída: </span> {{reserva.horarioSaida}}
                     </div>
                     <div class = "reserva-buttons">
-                        <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:15px">&#9998;</i></a>
-                        <a class="delete-link" href="{% url 'reserva-delete' pk=reserva.id %}">&#215;</a>
+                        <a href="{% url 'reserva-editar' pk=reserva.id %}"><i class="material-icons" style="font-size:30px">&#9998;</i></a>
+                        <a class="delete-link" href="{% url 'reserva-delete' pk=reserva.id %}">&#10799;</a>
                     </div>
                 </div>
             {% empty %}
