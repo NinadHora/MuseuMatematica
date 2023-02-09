@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, FormView
 from django.contrib.auth.models import User
 
 from museu_matematica.models import Reserva, Exposicao
-from museu_matematica.forms import ReservaModel2Form
+from museu_matematica.forms import ExposicaoModel2Form
 from museu_matematica.forms import ReservaModel2FormCreate
 
 from django.http.response import HttpResponseRedirect, JsonResponse
@@ -23,6 +23,34 @@ class ExposicaoListView(View):
         exposicoes = Exposicao.objects.all()
         context = { 'exposicoes': exposicoes, }
         return render(request, 'museu_matematica/exposicoes.html', context)
+
+class ExposicaoDelete(LoginRequiredMixin, View):
+    def get(self, request, pk, *args, **kwargs):
+        exposicao = Exposicao.objects.get(pk=pk)
+        context = { 'exposicao': exposicao }
+        return render(request, 'museu_matematica/exposicao-delete.html', context)
+
+    def post(self, request, pk, *args, **kwargs):
+        Exposicao.objects.filter(pk=pk).delete()
+        return HttpResponseRedirect(reverse_lazy("exposicoes"))
+
+class ExposicaoUpdate(LoginRequiredMixin, View):
+    def get(self, request, pk, *args, **kwargs): # Busca os dados de uma exposicao e exibe como um formulário
+        exposicao = Exposicao.objects.get(pk=pk)
+        formulario = ExposicaoModel2Form(instance=exposicao)
+        context = {'form': formulario, 'exposicao': exposicao } # Coloca o registro recuperado do banco e coloca num formulário
+        return render(request, 'museu_matematica/exposicao-editar.html', context)
+
+    def post(self, request, pk, *args, **kwargs): # Recebe os dados de uma exposicao e atualiza o banco de dados
+        exposicao = get_object_or_404(Exposicao, pk=pk) # Pega a exposicao ou retorna erro 404
+        formulario = ExposicaoModel2Form(request.POST, instance=exposicao)
+        if formulario.is_valid() and self.request.user.is_superuser:
+            contato = formulario.save()
+            contato.save()
+            return HttpResponseRedirect(reverse_lazy("exposicoes"))
+        else:
+            context = {'form': formulario, 'exposicao': exposicao}
+            return render(request,'museu_matematica/exposicao-editar.html', context)
 
 def verificaReserva(request):
     search_input_hrEntrada = request.GET.get('hrEntrada')

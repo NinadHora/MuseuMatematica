@@ -34,8 +34,12 @@
                         <h4>Faça login para reservar</h4>
                     {% else %}
                         {% if request.user.is_superuser %}
-                            <button>Editar</button>
-                            <button>Excluir</button>
+                            <form action="{% url 'exposicao-editar' pk=exposicao.id %}">
+                                <input type="submit" value="Editar" />
+                            </form>
+                            <form action="{% url 'exposicao-delete' pk=exposicao.id %}">
+                                <input type="submit" value="Excluir" />
+                            </form>
                         {% else %}
                         <form action="{% url 'reservar' pk=exposicao.id %}">
                             <input type="submit" value="Reservar" />
