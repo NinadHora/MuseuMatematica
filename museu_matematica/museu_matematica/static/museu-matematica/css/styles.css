@@ -188,6 +188,18 @@ h3 {
     padding-left: 20px;
 }
 
+.form-wrapper {
+    padding: 20px;
+}
+
+.form-wrapper h3 {
+    padding-bottom: 10px;
+}
+
+.delete-button {
+    font-size: 25px;
+}
+
 @media (max-width: 1200px) {
 
 }

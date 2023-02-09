@@ -14,16 +14,17 @@
     <body>
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
-
-        <h3>Editar reserva de "{{reserva.exposicao}}"</h3>
-        <form method="POST", action="">
-            <fieldset style="width: max-content;">
-                {% csrf_token %}
-                <table class='formulario'>
-                    {{ form.as_table }}
-                </table>
-                <button type="submit">Atualizar</button>
-            </fieldset>
-        </form>
+        <div class="form-wrapper">
+            <h3>Editar reserva de "{{reserva.exposicao}}"</h3>
+            <form method="POST", action="">
+                <fieldset style="width: max-content;">
+                    {% csrf_token %}
+                    <table class='formulario'>
+                        {{ form.as_table }}
+                    </table>
+                    <button type="submit">Atualizar</button>
+                </fieldset>
+            </form>
+        </div>
     </body>
     </html>

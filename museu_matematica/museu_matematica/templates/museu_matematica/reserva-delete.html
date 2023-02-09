@@ -16,11 +16,11 @@
         <!-- header do site -->
         {% include 'museu_matematica/header.html' %}
 
-        <div class="card-body">
+        <div class="form-wrapper">
             <form method="post">
                 {% csrf_token %}
-                <p>Quer realmente remover sua reserva de {{ reserva.exposicao }}?</p>
-                <input class="button" type="submit" value="Excluir">
+                <h3>Quer realmente remover sua reserva de {{ reserva.exposicao }}?</h3>
+                <input class="delete-button" type="submit" value="Excluir">
             </form>
         </div>
     </body>
