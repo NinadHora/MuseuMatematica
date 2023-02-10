@@ -20,6 +20,9 @@
         <div class ="hellotext_wrapper">
             <h3 class="hellotext">Olá, {% firstof user.username "visitante" %}!</h3>
             <h1 class="exposicoes_text">Exposições</h1>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'exposicao-create' %}"><i class="material-icons" style="font-size:50px">+</i></a>         
+        {% endif %}
         </div>
 
         <div class="exp_container">

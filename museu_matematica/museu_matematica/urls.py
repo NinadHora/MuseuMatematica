@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='homepage'),
     path('exposicoes/', ExposicaoListView.as_view(), name='exposicoes'),
+    path('adicionar-exposicao/', ExposicaoCreate.as_view(), name='exposicao-create'),
     path('deletar-exposicao/<int:pk>', ExposicaoDelete.as_view(), name='exposicao-delete'),
     path('editar-exposicao/<int:pk>', ExposicaoUpdate.as_view(), name='exposicao-editar'),
     path('reservar/<int:pk>', ReservaCreateView.as_view(), name='reservar'),

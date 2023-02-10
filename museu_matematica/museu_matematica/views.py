@@ -24,6 +24,20 @@ class ExposicaoListView(View):
         context = { 'exposicoes': exposicoes, }
         return render(request, 'museu_matematica/exposicoes.html', context)
 
+class ExposicaoCreate(View):
+    def get(self, request, *args, **kwargs):
+        context = {
+            'form': ExposicaoModel2Form, 
+            }
+        return render(request, 'museu_matematica/exposicao-adicionar.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = ExposicaoModel2Form(request.POST)
+        if form.is_valid():
+            exposicao = form.save()
+            exposicao.save()
+            return HttpResponseRedirect(reverse_lazy("exposicoes"))
+
 class ExposicaoDelete(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
         exposicao = Exposicao.objects.get(pk=pk)

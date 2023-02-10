@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar exposição</title>
+    <link rel="stylesheet" href="{% static 'museu-matematica/css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <!-- header do site -->
+        {% include 'museu_matematica/header.html' %}
+
+        <div class="form-wrapper">
+            <h3>Adicionar nova exposição</h3>
+            <form action="" method="POST">
+                <fieldset style="width: max-content;">
+                    {% csrf_token %}
+                    <table class='formulario'>
+                        {{ form.as_table }}
+                    </table>
+                    <button type="submit">Criar!</button>
+                </fieldset>
+        </div>
+    </body>
+    </form>
