@@ -134,4 +134,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'museu_matematica\static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 if not DEBUG:
-    CSRF_TRUSTED_ORIGINS = ['https://web-production-7494.up.railway.app 89']
+    CSRF_TRUSTED_ORIGINS = ['https://*.museumatematica-production.up.railway.app', 'https://museumatematica-production.up.railway.app/']
